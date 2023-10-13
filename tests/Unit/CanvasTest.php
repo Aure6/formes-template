@@ -23,5 +23,5 @@ it('can add formes', function () {
     expect($canvas->getFormes())->toHaveLength(1);
     $canvas->add(new Rectangle(new Point(0, 0), 10, 10));
     expect($canvas->getFormes())->toBeArray();
-    expect($canvas->getFormes())->toHaveLength(2);
+    expect($canvas->getFormes())->toHaveLength(2);//2 car 2 rectangles
 });
