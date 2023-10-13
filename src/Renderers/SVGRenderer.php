@@ -55,19 +55,27 @@ class SVGRenderer implements Renderer {
         foreach ($this->canvas->getFormes() as $forme) {
             // Switching based on the class of the forme
             switch (get_class($forme)) {
+                // If the forme is a Line
+                case Ligne::class:
+                    $line = new SVGLine(
+                        $forme->getPoint1()->getX(), 
+                        $forme->getPoint1()->getY(), 
+                        $forme->getPoint2()->getX(), 
+                        $forme->getPoint2()->getY());
+                    $line->setStyle('fill', $forme->getCouleur());
+                    // Adding the line to the SVG document
+                    $doc->addChild($line);
+                    break;
                 // If the forme is a Rectangle
                 case Rectangle::class:
-                    $rect = new SVGRect($forme->getPoint1()->getX(), $forme->getPoint2()->getY(), $forme->getWidth(), $forme->getHeight());
+                    $rect = new SVGRect(
+                        $forme->getPoint()->getX(), 
+                        $forme->getPoint()->getY(), 
+                        $forme->getWidth(), 
+                        $forme->getHeight());
                     $rect->setStyle('fill', $forme->getCouleur());
                     // Adding the rectangle to the SVG document
                     $doc->addChild($rect);
-                    break;
-                // If the forme is a Line
-                case Ligne::class:
-                    $line = new SVGLine($forme->getPoint1()->getX(), $forme->getPoint2()->getY());
-                    $line->setStyle('stroke', $forme->getCouleur());
-                    // Adding the line to the SVG document
-                    $doc->addChild($line);
                     break;
                 // If the forme is a Cercle
                 case Cercle::class:
