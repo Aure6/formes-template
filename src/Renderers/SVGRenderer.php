@@ -79,7 +79,13 @@ class SVGRenderer implements Renderer {
                     break;
                 // If the forme is a Cercle
                 case Cercle::class:
-                    // TODO: Implement Cercle rendering
+                    $circle = new SVGCircle(
+                        $forme->getCentre()->getX(), 
+                        $forme->getCentre()->getY(), 
+                        $forme->getRayon());
+                    $circle->setStyle('fill', $forme->getCouleur());
+                    // Adding the rectangle to the SVG document
+                    $doc->addChild($circle);
                     break;
                 // If the forme is a Polygone
                 case Polygone::class:
