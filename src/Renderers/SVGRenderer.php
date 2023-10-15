@@ -89,7 +89,20 @@ class SVGRenderer implements Renderer {
                     break;
                 // If the forme is a Polygone
                 case Polygone::class:
-                    // TODO: Implement Polygone rendering
+                    /* $polygone = new SVGCircle(
+                        $forme->getPoints()); 
+                    $polygone->setStyle('fill', $forme->getCouleur());
+                    // Adding the rectangle to the SVG document
+                    $doc->addChild($polygone);
+                    break; */
+                    $polygonPoints = [];
+                    foreach ($forme->getPoints() as $point) {
+                        $polygonPoints[] = [$point->getX(), $point->getY()];
+                    }
+                    
+                    $svgPolygon = new SVGPolygon($polygonPoints);
+                    $svgPolygon->setStyle('fill', $forme->getCouleur());
+                    $doc->addChild($svgPolygon);
                     break;
             }
         }
